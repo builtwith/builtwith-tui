@@ -1,0 +1,21 @@
+{
+  "name": "builtwith-tui",
+  "version": "0.1.0",
+  "description": "Terminal UI for the BuiltWith API",
+  "main": "src/index.js",
+  "bin": {
+    "builtwith": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": ["builtwith", "tui", "api"],
+  "author": "BuiltWith",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.5",
+    "blessed": "^0.1.81",
+    "ws": "^8.19.0"
+  }
+}
