@@ -1,6 +1,6 @@
 # 🟢 BuiltWith TUI
 
-A terminal-based user interface for exploring the [BuiltWith API](https://builtwith.com). Runs in any terminal — Windows CMD, PowerShell, or Bash.
+A terminal-based user interface for exploring the [BuiltWith API](https://api.builtwith.com). Runs in any terminal — Windows CMD, PowerShell, or Bash.
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-green) ![License](https://img.shields.io/badge/License-ISC-blue)
 
@@ -12,7 +12,6 @@ A terminal-based user interface for exploring the [BuiltWith API](https://builtw
 - 🎨 **Color-formatted JSON** — syntax-highlighted API responses for easy reading
 - 🔑 **API key management** — save your key locally so you don't have to re-enter it
 - 📜 **Call history** — re-run previous API calls with a single keystroke
-- 🟢 **Animated splash screen** — BuiltWith ASCII art in shades of green on startup
 
 ## 📦 Installation
 
@@ -38,7 +37,7 @@ builtwith
 ## 🚀 Quick Start
 
 1. Launch the app with `npm start`
-2. Press **F1** to enter your BuiltWith API key (get one at [builtwith.com](https://builtwith.com))
+2. Press **F1** to enter your BuiltWith API key (get one at [builtwith.com](https://api.builtwith.com))
 3. Use **↑ ↓** to browse endpoints in the sidebar
 4. Press **Enter** to select an endpoint and fill in parameters
 5. View the formatted JSON response in the main panel
@@ -87,7 +86,7 @@ Press **F9** to open the WebSocket panel. Available commands:
 ## 🔧 Requirements
 
 - **Node.js** 18 or later
-- A [BuiltWith API key](https://builtwith.com) (free tier available)
+- A [BuiltWith API key](https://api.builtwith.com) (free tier available)
 
 ## 📄 License
 
