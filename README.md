@@ -4,6 +4,10 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-green) ![License](https://img.shields.io/badge/License-ISC-blue)
 
+---
+
+![Screenshot](https://github.com/user-attachments/assets/23d5a8fc-0386-4ed6-a23a-23323e513d35)
+
 ## ✨ Features
 
 - 🖥️ **Full TUI experience** — navigate endpoints, enter parameters, and view results without leaving the terminal
