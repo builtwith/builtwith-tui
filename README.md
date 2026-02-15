@@ -4,6 +4,9 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-green) ![License](https://img.shields.io/badge/License-ISC-blue)
 
+[▶ Watch Demo](https://github.com/user-attachments/assets/332c7bdc-4fb0-450f-87bc-beff993b296e)
+
+
 ---
 
 ![Screenshot](https://github.com/user-attachments/assets/23d5a8fc-0386-4ed6-a23a-23323e513d35)
