@@ -120,6 +120,15 @@ const ENDPOINTS = {
       { name: 'LOOKUP', required: true, description: 'Domain to look up (e.g. example.com)' },
     ],
   },
+  vector: {
+    name: 'Vector Search',
+    description: 'Search technologies and categories by text using semantic similarity',
+    path: '/vector/v1/api.json',
+    params: [
+      { name: 'QUERY', required: true, description: 'Text search query (e.g. react framework)' },
+      { name: 'LIMIT', required: false, description: 'Number of results (default 10, max 100)' },
+    ],
+  },
 };
 
 async function callApi(endpointKey, apiKey, paramValues) {
