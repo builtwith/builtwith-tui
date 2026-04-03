@@ -129,6 +129,16 @@ const ENDPOINTS = {
       { name: 'LIMIT', required: false, description: 'Number of results (default 10, max 100)' },
     ],
   },
+  keywordSearch: {
+    name: 'Keyword Search',
+    description: 'Find websites containing a specific keyword',
+    path: '/kws1/api.json',
+    params: [
+      { name: 'KEYWORD', required: true, description: 'Keyword to search for (e.g. perfume)' },
+      { name: 'LIMIT', required: false, description: 'Results per page (16-1000, default 100)' },
+      { name: 'OFFSET', required: false, description: 'Pagination offset (NextOffset from previous response)' },
+    ],
+  },
 };
 
 async function callApi(endpointKey, apiKey, paramValues) {
