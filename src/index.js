@@ -278,24 +278,27 @@ async function showAgentAuthFlow() {
     try {
       tokenResult = await callApi('agentAuthToken', null, { device_code });
     } catch (err) {
-      pollTimer = setTimeout(poll, 5000);
-      return;
+      // axios throws on 4xx — extract the response body if available
+      if (err.response && err.response.data) {
+        tokenResult = err.response.data;
+      } else {
+        pollTimer = setTimeout(poll, 5000);
+        return;
+      }
     }
 
-    const status = tokenResult.status || tokenResult.Status;
-    const accessToken = tokenResult.access_token || tokenResult.AccessToken;
-
-    if (status === 'approved' && accessToken) {
+    // Approved: server returns { access_token, token_type, expires_in }
+    if (tokenResult.access_token) {
       authPanel.setLabel(' ✓ Authorization Approved ');
       uriDisplay.setLabel(' Access Token ');
       uriDisplay.style.border.fg = 'green';
       uriDisplay.style.fg = 'green';
-      uriDisplay.setContent(`${accessToken}`);
+      uriDisplay.setContent(`${tokenResult.access_token}`);
       statusLine.setContent('{green-fg}✓ Approved! Press {bold}Enter{/bold} to save as API key, {bold}Esc{/bold} to dismiss.{/green-fg}');
       screen.render();
 
       authPanel.key('enter', () => {
-        currentApiKey = accessToken;
+        currentApiKey = tokenResult.access_token;
         setApiKey(currentApiKey);
         cleanup();
         updateStatus(`API key saved: ${currentApiKey.substring(0, 12)}...`);
@@ -303,21 +306,22 @@ async function showAgentAuthFlow() {
       return;
     }
 
-    if (status === 'denied') {
-      authPanel.setLabel(' ✗ Authorization Denied ');
-      statusLine.setContent('{red-fg}✗ Denied by user. Press Esc to close.{/red-fg}');
-      screen.render();
-      return;
-    }
-
-    if (status === 'pending') {
+    // Pending: { error: "authorization_pending" }
+    if (tokenResult.error === 'authorization_pending') {
       pollTimer = setTimeout(poll, 5000);
       return;
     }
 
-    const errMsg = tokenResult.Error || tokenResult.error || tokenResult.message
-      || (status ? `Status: ${status}` : null)
-      || JSON.stringify(tokenResult);
+    // Denied: { error: "access_denied" }
+    if (tokenResult.error === 'access_denied') {
+      authPanel.setLabel(' ✗ Authorization Denied ');
+      statusLine.setContent('{red-fg}✗ Denied. Press Esc to close.{/red-fg}');
+      screen.render();
+      return;
+    }
+
+    // Expired or other error
+    const errMsg = tokenResult.error_description || tokenResult.error || JSON.stringify(tokenResult);
     statusLine.setContent(`{red-fg}✗ ${errMsg} — Press Esc to close.{/red-fg}`);
     screen.render();
   }
