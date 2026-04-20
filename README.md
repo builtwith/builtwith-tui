@@ -23,22 +23,23 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 ## 📦 Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/builtwith/builtwith-tui.git
-cd builtwith-tui
-
-# Install dependencies
-npm install
-
-# Run the app
-npm start
+npm install -g @builtwith/tui
+builtwith-tui
 ```
 
-Or install globally:
+Or run without installing:
 
 ```bash
-npm install -g .
-builtwith
+npx @builtwith/tui
+```
+
+Or clone and run from source:
+
+```bash
+git clone https://github.com/builtwith/builtwith-tui.git
+cd builtwith-tui
+npm install
+npm start
 ```
 
 ## 🚀 Quick Start
