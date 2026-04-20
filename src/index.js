@@ -186,7 +186,9 @@ async function showAgentAuthFlow() {
 
   const { device_code, verification_uri } = startResult;
   if (!device_code || !verification_uri) {
-    detailPanel.setContent(`{red-fg}Unexpected response:{/red-fg}\n${JSON.stringify(startResult, null, 2)}`);
+    const msg = startResult.Error || startResult.error || startResult.message || JSON.stringify(startResult, null, 2);
+    updateStatus('Authorization start failed');
+    detailPanel.setContent(`{red-fg}Authorization Error:{/red-fg}\n\n${msg}`);
     screen.render();
     return;
   }
@@ -194,8 +196,8 @@ async function showAgentAuthFlow() {
   let cancelled = false;
   let pollTimer = null;
 
-  const PANEL_W = 72;
-  const PANEL_H = 13;
+  const PANEL_W = Math.min(Math.max(verification_uri.length + 10, 76), screen.width - 4);
+  const PANEL_H = 14;
 
   const authPanel = blessed.box({
     parent: screen,
@@ -226,7 +228,9 @@ async function showAgentAuthFlow() {
     border: { type: 'line' },
     style: { border: { fg: 'cyan' }, fg: 'cyan' },
     tags: true,
-    content: `{center}${verification_uri}{/center}`,
+    wrap: false,
+    scrollable: true,
+    content: `${verification_uri}`,
   });
 
   const statusLine = blessed.text({
@@ -282,7 +286,8 @@ async function showAgentAuthFlow() {
       authPanel.setLabel(' ✓ Authorization Approved ');
       uriDisplay.setLabel(' Access Token ');
       uriDisplay.style.border.fg = 'green';
-      uriDisplay.setContent(`{center}{green-fg}${tokenResult.access_token}{/green-fg}{/center}`);
+      uriDisplay.style.fg = 'green';
+      uriDisplay.setContent(`${tokenResult.access_token}`);
       statusLine.setContent('{green-fg}✓ Approved! Press {bold}Enter{/bold} to save as API key, {bold}Esc{/bold} to dismiss.{/green-fg}');
       screen.render();
 
@@ -298,6 +303,20 @@ async function showAgentAuthFlow() {
     if (tokenResult.status === 'denied') {
       authPanel.setLabel(' ✗ Authorization Denied ');
       statusLine.setContent('{red-fg}✗ Denied by user. Press Esc to close.{/red-fg}');
+      screen.render();
+      return;
+    }
+
+    if (tokenResult.status && tokenResult.status !== 'pending') {
+      const errMsg = tokenResult.Error || tokenResult.error || tokenResult.message || tokenResult.status;
+      statusLine.setContent(`{red-fg}✗ Error: ${errMsg} — Press Esc to close.{/red-fg}`);
+      screen.render();
+      return;
+    }
+
+    if (!tokenResult.status) {
+      const errMsg = tokenResult.Error || tokenResult.error || tokenResult.message || 'Unexpected response';
+      statusLine.setContent(`{red-fg}✗ ${errMsg} — Press Esc to close.{/red-fg}`);
       screen.render();
       return;
     }
