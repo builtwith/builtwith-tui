@@ -116,7 +116,7 @@ function showEndpointInfo(index) {
     content += `{bold}Parameters:{/bold} None${ep.noApiKey ? ' {green-fg}(no API key required){/green-fg}' : ' (uses API key only)'}\n`;
   }
 
-  const enterHint = ep.noApiKey && ep.params.length === 0 && endpointKey === 'agentAuthStart'
+  const enterHint = key === 'agentAuthStart'
     ? 'Press Enter to start the authorization flow'
     : 'Press Enter to call this endpoint';
   content += `\n{bold}${enterHint}{/bold}`;
