@@ -282,17 +282,20 @@ async function showAgentAuthFlow() {
       return;
     }
 
-    if (tokenResult.status === 'approved' && tokenResult.access_token) {
+    const status = tokenResult.status || tokenResult.Status;
+    const accessToken = tokenResult.access_token || tokenResult.AccessToken;
+
+    if (status === 'approved' && accessToken) {
       authPanel.setLabel(' ✓ Authorization Approved ');
       uriDisplay.setLabel(' Access Token ');
       uriDisplay.style.border.fg = 'green';
       uriDisplay.style.fg = 'green';
-      uriDisplay.setContent(`${tokenResult.access_token}`);
+      uriDisplay.setContent(`${accessToken}`);
       statusLine.setContent('{green-fg}✓ Approved! Press {bold}Enter{/bold} to save as API key, {bold}Esc{/bold} to dismiss.{/green-fg}');
       screen.render();
 
       authPanel.key('enter', () => {
-        currentApiKey = tokenResult.access_token;
+        currentApiKey = accessToken;
         setApiKey(currentApiKey);
         cleanup();
         updateStatus(`API key saved: ${currentApiKey.substring(0, 12)}...`);
@@ -300,28 +303,23 @@ async function showAgentAuthFlow() {
       return;
     }
 
-    if (tokenResult.status === 'denied') {
+    if (status === 'denied') {
       authPanel.setLabel(' ✗ Authorization Denied ');
       statusLine.setContent('{red-fg}✗ Denied by user. Press Esc to close.{/red-fg}');
       screen.render();
       return;
     }
 
-    if (tokenResult.status && tokenResult.status !== 'pending') {
-      const errMsg = tokenResult.Error || tokenResult.error || tokenResult.message || tokenResult.status;
-      statusLine.setContent(`{red-fg}✗ Error: ${errMsg} — Press Esc to close.{/red-fg}`);
-      screen.render();
+    if (status === 'pending') {
+      pollTimer = setTimeout(poll, 5000);
       return;
     }
 
-    if (!tokenResult.status) {
-      const errMsg = tokenResult.Error || tokenResult.error || tokenResult.message || 'Unexpected response';
-      statusLine.setContent(`{red-fg}✗ ${errMsg} — Press Esc to close.{/red-fg}`);
-      screen.render();
-      return;
-    }
-
-    pollTimer = setTimeout(poll, 5000);
+    const errMsg = tokenResult.Error || tokenResult.error || tokenResult.message
+      || (status ? `Status: ${status}` : null)
+      || JSON.stringify(tokenResult);
+    statusLine.setContent(`{red-fg}✗ ${errMsg} — Press Esc to close.{/red-fg}`);
+    screen.render();
   }
 
   pollTimer = setTimeout(poll, 5000);
