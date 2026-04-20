@@ -14,7 +14,7 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 ## ✨ Features
 
 - 🖥️ **Full TUI experience** — navigate endpoints, enter parameters, and view results without leaving the terminal
-- 🌐 **All 15 REST API endpoints** — Domain, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, WhoAmI, and Usage
+- 🌐 **All 17 REST API endpoints** — Domain, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, WhoAmI, Usage, and Agent Device-Code Authorization
 - 📡 **WebSocket Live Feed** — real-time technology detection stream with subscribe/unsubscribe commands
 - 🎨 **Color-formatted JSON** — syntax-highlighted API responses for easy reading
 - 🔑 **API key management** — save your key locally so you don't have to re-enter it
@@ -81,6 +81,8 @@ builtwith
 | 13 | 🔎 **Vector Search** | Semantic search across technologies and categories |
 | 14 | 👤 **WhoAmI** | Check API key identity and plan details |
 | 15 | 📊 **Usage** | View API usage statistics |
+| 16 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
+| 17 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
 
 ## 📡 WebSocket Live Feed
 

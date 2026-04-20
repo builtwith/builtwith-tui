@@ -161,6 +161,13 @@ async function callApi(endpointKey, apiKey, paramValues) {
   const endpoint = ENDPOINTS[endpointKey];
   if (!endpoint) throw new Error(`Unknown endpoint: ${endpointKey}`);
 
+  const url = `${BASE_URL}${endpoint.path}`;
+
+  if (endpoint.method === 'POST') {
+    const response = await axios.post(url, paramValues || {}, { timeout: 30000 });
+    return response.data;
+  }
+
   const queryParams = { KEY: apiKey };
   for (const [key, value] of Object.entries(paramValues)) {
     if (value !== undefined && value !== '') {
@@ -168,7 +175,6 @@ async function callApi(endpointKey, apiKey, paramValues) {
     }
   }
 
-  const url = `${BASE_URL}${endpoint.path}`;
   const response = await axios.get(url, {
     params: queryParams,
     timeout: 30000,
