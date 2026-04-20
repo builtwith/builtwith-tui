@@ -116,7 +116,10 @@ function showEndpointInfo(index) {
     content += `{bold}Parameters:{/bold} None${ep.noApiKey ? ' {green-fg}(no API key required){/green-fg}' : ' (uses API key only)'}\n`;
   }
 
-  content += '\n{bold}Press Enter to call this endpoint{/bold}';
+  const enterHint = ep.noApiKey && ep.params.length === 0 && endpointKey === 'agentAuthStart'
+    ? 'Press Enter to start the authorization flow'
+    : 'Press Enter to call this endpoint';
+  content += `\n{bold}${enterHint}{/bold}`;
 
   detailPanel.setLabel(` ${ep.name} `);
   detailPanel.setContent(content);
@@ -165,8 +168,153 @@ function promptInput(label, defaultValue) {
   });
 }
 
+// ── Agent Device-Code Authorization Flow ──────────────────────────────────────
+async function showAgentAuthFlow() {
+  updateStatus('Starting authorization...');
+  detailPanel.setContent('{yellow-fg}Contacting BuiltWith...{/yellow-fg}');
+  screen.render();
+
+  let startResult;
+  try {
+    startResult = await callApi('agentAuthStart', null, {});
+  } catch (err) {
+    updateStatus('Failed to start authorization');
+    detailPanel.setContent(`{red-fg}Error: ${err.message}{/red-fg}`);
+    screen.render();
+    return;
+  }
+
+  const { device_code, verification_uri } = startResult;
+  if (!device_code || !verification_uri) {
+    detailPanel.setContent(`{red-fg}Unexpected response:{/red-fg}\n${JSON.stringify(startResult, null, 2)}`);
+    screen.render();
+    return;
+  }
+
+  let cancelled = false;
+  let pollTimer = null;
+
+  const PANEL_W = 72;
+  const PANEL_H = 13;
+
+  const authPanel = blessed.box({
+    parent: screen,
+    label: ' 🔐 Agent Device-Code Authorization ',
+    top: 'center',
+    left: 'center',
+    width: PANEL_W,
+    height: PANEL_H,
+    border: { type: 'line' },
+    style: { border: { fg: 'yellow' }, fg: 'white', bg: 'black' },
+    tags: true,
+  });
+
+  blessed.text({
+    parent: authPanel,
+    top: 1,
+    left: 2,
+    tags: true,
+    content: '{bold}Open this URL in your browser to approve access:{/bold}',
+  });
+
+  const uriDisplay = blessed.box({
+    parent: authPanel,
+    top: 3,
+    left: 2,
+    width: PANEL_W - 6,
+    height: 3,
+    border: { type: 'line' },
+    style: { border: { fg: 'cyan' }, fg: 'cyan' },
+    tags: true,
+    content: `{center}${verification_uri}{/center}`,
+  });
+
+  const statusLine = blessed.text({
+    parent: authPanel,
+    top: 7,
+    left: 2,
+    tags: true,
+    content: '{yellow-fg}◐ Waiting for browser approval...{/yellow-fg}',
+  });
+
+  blessed.text({
+    parent: authPanel,
+    top: PANEL_H - 3,
+    left: 2,
+    tags: true,
+    content: '{gray-fg}Esc to cancel{/gray-fg}',
+  });
+
+  const spinFrames = ['◐','◓','◑','◒'];
+  let spinIdx = 0;
+
+  function cleanup() {
+    cancelled = true;
+    if (pollTimer) clearTimeout(pollTimer);
+    authPanel.destroy();
+    screen.render();
+  }
+
+  authPanel.key('escape', () => {
+    cleanup();
+    updateStatus('Authorization cancelled');
+  });
+
+  authPanel.focus();
+  screen.render();
+
+  async function poll() {
+    if (cancelled) return;
+
+    spinIdx = (spinIdx + 1) % spinFrames.length;
+    statusLine.setContent(`{yellow-fg}${spinFrames[spinIdx]} Waiting for browser approval...{/yellow-fg}`);
+    screen.render();
+
+    let tokenResult;
+    try {
+      tokenResult = await callApi('agentAuthToken', null, { device_code });
+    } catch (err) {
+      pollTimer = setTimeout(poll, 5000);
+      return;
+    }
+
+    if (tokenResult.status === 'approved' && tokenResult.access_token) {
+      authPanel.setLabel(' ✓ Authorization Approved ');
+      uriDisplay.setLabel(' Access Token ');
+      uriDisplay.style.border.fg = 'green';
+      uriDisplay.setContent(`{center}{green-fg}${tokenResult.access_token}{/green-fg}{/center}`);
+      statusLine.setContent('{green-fg}✓ Approved! Press {bold}Enter{/bold} to save as API key, {bold}Esc{/bold} to dismiss.{/green-fg}');
+      screen.render();
+
+      authPanel.key('enter', () => {
+        currentApiKey = tokenResult.access_token;
+        setApiKey(currentApiKey);
+        cleanup();
+        updateStatus(`API key saved: ${currentApiKey.substring(0, 12)}...`);
+      });
+      return;
+    }
+
+    if (tokenResult.status === 'denied') {
+      authPanel.setLabel(' ✗ Authorization Denied ');
+      statusLine.setContent('{red-fg}✗ Denied by user. Press Esc to close.{/red-fg}');
+      screen.render();
+      return;
+    }
+
+    pollTimer = setTimeout(poll, 5000);
+  }
+
+  pollTimer = setTimeout(poll, 5000);
+}
+
 // ── Parameter Form Dialog ──────────────────────────────────────────────────────
 async function showParamForm(endpointKey) {
+  if (endpointKey === 'agentAuthStart') {
+    showAgentAuthFlow();
+    return;
+  }
+
   const ep = ENDPOINTS[endpointKey];
 
   if (!ep.noApiKey && !currentApiKey) {
