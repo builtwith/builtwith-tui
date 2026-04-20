@@ -139,6 +139,22 @@ const ENDPOINTS = {
       { name: 'OFFSET', required: false, description: 'Pagination offset (NextOffset from previous response)' },
     ],
   },
+  agentAuthStart: {
+    name: 'Agent Auth Start',
+    description: 'Start Agent Device-Code Authorization. Returns device_code and verification_uri. No API key required.',
+    path: '/agent-auth/start',
+    method: 'POST',
+    params: [],
+  },
+  agentAuthToken: {
+    name: 'Agent Auth Token',
+    description: 'Poll for Device-Code Authorization result. Returns status (pending/approved/denied) and access_token on approval. No API key required.',
+    path: '/agent-auth/token',
+    method: 'POST',
+    params: [
+      { name: 'device_code', required: true, description: 'Device code received from Agent Auth Start' },
+    ],
+  },
 };
 
 async function callApi(endpointKey, apiKey, paramValues) {
