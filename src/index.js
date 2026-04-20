@@ -113,7 +113,7 @@ function showEndpointInfo(index) {
       content += `  ${reqTag} {green-fg}${p.name}{/green-fg} - ${p.description}\n`;
     }
   } else {
-    content += '{bold}Parameters:{/bold} None (uses API key only)\n';
+    content += `{bold}Parameters:{/bold} None${ep.noApiKey ? ' {green-fg}(no API key required){/green-fg}' : ' (uses API key only)'}\n`;
   }
 
   content += '\n{bold}Press Enter to call this endpoint{/bold}';
@@ -169,7 +169,7 @@ function promptInput(label, defaultValue) {
 async function showParamForm(endpointKey) {
   const ep = ENDPOINTS[endpointKey];
 
-  if (!currentApiKey) {
+  if (!ep.noApiKey && !currentApiKey) {
     await promptSetApiKey();
     if (!currentApiKey) {
       updateStatus('API key required');

@@ -144,6 +144,7 @@ const ENDPOINTS = {
     description: 'Start Agent Device-Code Authorization. Returns device_code and verification_uri. No API key required.',
     path: '/agent-auth/start',
     method: 'POST',
+    noApiKey: true,
     params: [],
   },
   agentAuthToken: {
@@ -151,6 +152,7 @@ const ENDPOINTS = {
     description: 'Poll for Device-Code Authorization result. Returns status (pending/approved/denied) and access_token on approval. No API key required.',
     path: '/agent-auth/token',
     method: 'POST',
+    noApiKey: true,
     params: [
       { name: 'device_code', required: true, description: 'Device code received from Agent Auth Start' },
     ],
