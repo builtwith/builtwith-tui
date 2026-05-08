@@ -14,7 +14,7 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 ## ✨ Features
 
 - 🖥️ **Full TUI experience** — navigate endpoints, enter parameters, and view results without leaving the terminal
-- 🌐 **All 17 REST API endpoints** — Domain, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, WhoAmI, Usage, and Agent Device-Code Authorization
+- 🌐 **All 18 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, WhoAmI, Usage, and Agent Device-Code Authorization
 - 📡 **WebSocket Live Feed** — real-time technology detection stream with subscribe/unsubscribe commands
 - 🎨 **Color-formatted JSON** — syntax-highlighted API responses for easy reading
 - 🔑 **API key management** — save your key locally so you don't have to re-enter it
@@ -68,22 +68,23 @@ npm start
 | # | Endpoint | Description |
 |---|----------|-------------|
 | 1 | 🔍 **Domain API** | Technology and metadata for any domain |
-| 2 | 📋 **Lists API** | Sites using a specific technology |
-| 3 | 🔗 **Relationships API** | Related sites via shared identifiers |
-| 4 | 🆓 **Free API** | Summary counts for technology groups |
-| 5 | 🏢 **Company to URL** | Discover domains from company names |
-| 6 | 🏷️ **Tags API** | Domains related to IPs and attributes |
-| 7 | 💡 **Recommendations** | Technology recommendations for a domain |
-| 8 | ↪️ **Redirects API** | Redirect history for a domain |
-| 9 | 🔑 **Keywords API** | Keywords associated with a domain |
-| 10 | 📈 **Trends API** | Technology adoption trends |
-| 11 | 🛒 **Product API** | Find websites selling specific products |
-| 12 | 🛡️ **Trust API** | Trust and fraud signals for a domain |
-| 13 | 🔎 **Vector Search** | Semantic search across technologies and categories |
-| 14 | 👤 **WhoAmI** | Check API key identity and plan details |
-| 15 | 📊 **Usage** | View API usage statistics |
-| 16 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
-| 17 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
+| 2 | 🔄 **Change API** | Technology additions and removals |
+| 3 | 📋 **Lists API** | Sites using a specific technology |
+| 4 | 🔗 **Relationships API** | Related sites via shared identifiers |
+| 5 | 🆓 **Free API** | Summary counts for technology groups |
+| 6 | 🏢 **Company to URL** | Discover domains from company names |
+| 7 | 🏷️ **Tags API** | Domains related to IPs and attributes |
+| 8 | 💡 **Recommendations** | Technology recommendations for a domain |
+| 9 | ↪️ **Redirects API** | Redirect history for a domain |
+| 10 | 🔑 **Keywords API** | Keywords associated with a domain |
+| 11 | 📈 **Trends API** | Technology adoption trends |
+| 12 | 🛒 **Product API** | Find websites selling specific products |
+| 13 | 🛡️ **Trust API** | Trust and fraud signals for a domain |
+| 14 | 🔎 **Vector Search** | Semantic search across technologies and categories |
+| 15 | 👤 **WhoAmI** | Check API key identity and plan details |
+| 16 | 📊 **Usage** | View API usage statistics |
+| 17 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
+| 18 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
 
 ## 📡 WebSocket Live Feed
 

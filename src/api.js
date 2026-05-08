@@ -29,6 +29,15 @@ const ENDPOINTS = {
       { name: 'LDRANGE', required: false, description: 'Last detected date range filter' },
     ],
   },
+  change: {
+    name: 'Change API',
+    description: 'Technology additions and removals with business context',
+    path: '/change1/api.json',
+    params: [
+      { name: 'LOOKUP', required: true, description: 'Domain or comma-separated domains (e.g. example.com,builtwith.com)' },
+      { name: 'SINCE', required: false, description: 'Natural language date (e.g. last month; default 3 months)' },
+    ],
+  },
   lists: {
     name: 'Lists API',
     description: 'Sites using a specific technology',
