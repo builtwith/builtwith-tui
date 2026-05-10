@@ -1,6 +1,6 @@
 {
   "name": "@builtwith/tui",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "Terminal UI for the BuiltWith API",
   "main": "src/index.js",
   "bin": {

@@ -44,6 +44,7 @@ const ENDPOINTS = {
     path: '/lists12/api.json',
     params: [
       { name: 'TECH', required: true, description: 'Technology name (e.g. Shopify)' },
+      { name: 'OTHERTECHS', required: false, description: 'Comma-separated additional required technologies (max 16)' },
       { name: 'OFFSET', required: false, description: 'Pagination offset token' },
     ],
   },
