@@ -1,16 +1,17 @@
 {
   "name": "@builtwith/tui",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "Terminal UI for the BuiltWith API",
   "main": "src/index.js",
   "bin": {
-    "builtwith-tui": "./src/index.js",
-    "bwtui": "./src/index.js"
+    "builtwith-tui": "./bin/bwtui.js",
+    "bwtui": "./bin/bwtui.js"
   },
   "scripts": {
     "start": "node src/index.js"
   },
   "files": [
+    "bin/",
     "src/",
     "art/",
     "README.md"
