@@ -1,11 +1,11 @@
 {
   "name": "@builtwith/tui",
-  "version": "0.3.15",
+  "version": "0.3.16",
   "description": "Terminal UI for the BuiltWith API",
   "main": "src/index.js",
   "bin": {
-    "builtwith-tui": "./bin/bwtui.js",
-    "bwtui": "./bin/bwtui.js"
+    "builtwith-tui": "bin/bwtui.js",
+    "bwtui": "bin/bwtui.js"
   },
   "scripts": {
     "start": "node src/index.js"
@@ -16,13 +16,19 @@
     "art/",
     "README.md"
   ],
-  "keywords": ["builtwith", "tui", "terminal", "api", "cli"],
+  "keywords": [
+    "builtwith",
+    "tui",
+    "terminal",
+    "api",
+    "cli"
+  ],
   "author": "BuiltWith",
   "license": "ISC",
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/builtwith/builtwith-tui.git"
+    "url": "git+https://github.com/builtwith/builtwith-tui.git"
   },
   "homepage": "https://github.com/builtwith/builtwith-tui#readme",
   "bugs": {
