@@ -159,6 +159,17 @@ const ENDPOINTS = {
       { name: 'OFFSET', required: false, description: 'Pagination offset (NextOffset from previous response)' },
     ],
   },
+  ask: {
+    name: 'Ask API',
+    description: 'Natural language website list lookup (e.g. "Magento websites in Spain")',
+    path: '/ask1/api.json',
+    params: [
+      { name: 'QUERY', required: true, description: 'Natural language query (e.g. Magento websites in Spain)' },
+      { name: 'COMMIT', required: false, description: 'Set to true to run a full report (up to 1000 results)' },
+      { name: 'NEXTOFFSET', required: false, description: 'Pagination offset from previous response NextOffset' },
+      { name: 'META', required: false, description: 'Set to yes to include metadata' },
+    ],
+  },
   agentAuthStart: {
     name: 'Agent Auth Start',
     description: 'Start Agent Device-Code Authorization. Returns device_code and verification_uri. No API key required.',
