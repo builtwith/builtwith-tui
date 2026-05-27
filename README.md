@@ -14,7 +14,7 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 ## ✨ Features
 
 - 🖥️ **Full TUI experience** — navigate endpoints, enter parameters, and view results without leaving the terminal
-- 🌐 **All 18 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, WhoAmI, Usage, and Agent Device-Code Authorization
+- 🌐 **All 19 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, Ask API, WhoAmI, Usage, and Agent Device-Code Authorization
 - 📡 **WebSocket Live Feed** — real-time technology detection stream with subscribe/unsubscribe commands
 - 🎨 **Color-formatted JSON** — syntax-highlighted API responses for easy reading
 - 🔑 **API key management** — save your key locally so you don't have to re-enter it
@@ -24,7 +24,7 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 
 ```bash
 npm install -g @builtwith/tui
-builtwith-tui
+bwtui
 ```
 
 Or run without installing:
@@ -44,7 +44,7 @@ npm start
 
 ## 🚀 Quick Start
 
-1. Launch the app with `npm start`
+1. Launch with `bwtui` (or `npx @builtwith/tui`)
 2. Press **F1** to enter your BuiltWith API key (get one at [builtwith.com](https://api.builtwith.com))
 3. Use **↑ ↓** to browse endpoints in the sidebar
 4. Press **Enter** to select an endpoint and fill in parameters
@@ -81,10 +81,30 @@ npm start
 | 12 | 🛒 **Product API** | Find websites selling specific products |
 | 13 | 🛡️ **Trust API** | Trust and fraud signals for a domain |
 | 14 | 🔎 **Vector Search** | Semantic search across technologies and categories |
-| 15 | 👤 **WhoAmI** | Check API key identity and plan details |
-| 16 | 📊 **Usage** | View API usage statistics |
-| 17 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
-| 18 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
+| 15 | 💬 **Ask API** | Natural language website list lookup (e.g. "Magento websites in Spain") |
+| 16 | 👤 **WhoAmI** | Check API key identity and plan details |
+| 17 | 📊 **Usage** | View API usage statistics |
+| 18 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
+| 19 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
+
+### 💬 Ask API — Natural Language Lookups
+
+The Ask API lets you query the BuiltWith database in plain English:
+
+- `Magento websites in Spain`
+- `React e-commerce sites with high revenue`
+- `Shopify stores selling pet products`
+
+**Parameters:**
+
+| Parameter | Description |
+|---|---|
+| `QUERY` | Your natural language question *(required)* |
+| `COMMIT` | Set to `true` for a full report (up to 1,000 results) |
+| `NEXTOFFSET` | Paste the `NextOffset` from a previous response to get the next page |
+| `META` | Set to `yes` to include metadata |
+
+Without `COMMIT`, every request returns a quick sample — great for previewing before running a full report.
 
 ## 📡 WebSocket Live Feed
 
