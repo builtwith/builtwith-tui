@@ -14,7 +14,7 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 ## ✨ Features
 
 - 🖥️ **Full TUI experience** — navigate endpoints, enter parameters, and view results without leaving the terminal
-- 🌐 **All 19 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, Vector Search, Ask API, WhoAmI, Usage, and Agent Device-Code Authorization
+- 🌐 **All 21 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, VAT, VAT Types, Vector Search, Ask API, WhoAmI, Usage, and Agent Device-Code Authorization
 - 📡 **WebSocket Live Feed** — real-time technology detection stream with subscribe/unsubscribe commands
 - 🎨 **Color-formatted JSON** — syntax-highlighted API responses for easy reading
 - 🔑 **API key management** — save your key locally so you don't have to re-enter it
@@ -80,12 +80,14 @@ npm start
 | 11 | 📈 **Trends API** | Technology adoption trends |
 | 12 | 🛒 **Product API** | Find websites selling specific products |
 | 13 | 🛡️ **Trust API** | Trust and fraud signals for a domain |
-| 14 | 🔎 **Vector Search** | Semantic search across technologies and categories |
-| 15 | 💬 **Ask API** | Natural language website list lookup (e.g. "Magento websites in Spain") |
-| 16 | 👤 **WhoAmI** | Check API key identity and plan details |
-| 17 | 📊 **Usage** | View API usage statistics |
-| 18 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
-| 19 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
+| 14 | 🧾 **VAT API** | VAT, GST, and other company registration numbers for websites |
+| 15 | 🧾 **VAT Types API** | Reference list of registration types (no API key required) |
+| 16 | 🔎 **Vector Search** | Semantic search across technologies and categories |
+| 17 | 💬 **Ask API** | Natural language website list lookup (e.g. "Magento websites in Spain") |
+| 18 | 👤 **WhoAmI** | Check API key identity and plan details |
+| 19 | 📊 **Usage** | View API usage statistics |
+| 20 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
+| 21 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
 
 ### 💬 Ask API — Natural Language Lookups
 

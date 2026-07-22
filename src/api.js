@@ -140,6 +140,20 @@ const ENDPOINTS = {
       { name: 'LOOKUP', required: true, description: 'Domain to look up (e.g. example.com)' },
     ],
   },
+  vat: {
+    name: 'VAT API',
+    description: 'VAT, GST, and other company registration numbers for websites',
+    path: '/vat1/api.json',
+    params: [
+      { name: 'LOOKUP', required: true, description: '1 to 16 comma-separated domains (e.g. example.com,builtwith.com)' },
+    ],
+  },
+  vatTypes: {
+    name: 'VAT Types API',
+    description: 'Reference list of registration types returned by the VAT API (no API key required)',
+    path: '/vat1/types.json',
+    params: [],
+  },
   vector: {
     name: 'Vector Search',
     description: 'Search technologies and categories by text using semantic similarity',
