@@ -154,6 +154,16 @@ const ENDPOINTS = {
     path: '/vat1/types.json',
     params: [],
   },
+  mcpRegistry: {
+    name: 'MCP Registry API',
+    description: 'Search and browse the BuiltWith MCP registry of discovered remote MCP servers (no API credits)',
+    path: '/mcp1/api.json',
+    params: [
+      { name: 'SEARCH', required: false, description: 'Matches domain, description, endpoint URL, and tool names/descriptions' },
+      { name: 'CATEGORY', required: false, description: 'Category to filter by (e.g. developer-tools)' },
+      { name: 'OFFSET', required: false, description: 'Pagination offset' },
+    ],
+  },
   vector: {
     name: 'Vector Search',
     description: 'Search technologies and categories by text using semantic similarity',
