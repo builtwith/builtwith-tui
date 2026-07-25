@@ -14,7 +14,7 @@ A terminal-based user interface for exploring the [BuiltWith API](https://api.bu
 ## ✨ Features
 
 - 🖥️ **Full TUI experience** — navigate endpoints, enter parameters, and view results without leaving the terminal
-- 🌐 **All 22 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, VAT, VAT Types, MCP Registry, Vector Search, Ask API, WhoAmI, Usage, and Agent Device-Code Authorization
+- 🌐 **All 23 REST API endpoints** — Domain, Change, Lists, Relationships, Free, Company to URL, Tags, Recommendations, Redirects, Keywords, Trends, Product, Trust, VAT, VAT Types, MCP Registry (v1 & v2), Vector Search, Ask API, WhoAmI, Usage, and Agent Device-Code Authorization
 - 📡 **WebSocket Live Feed** — real-time technology detection stream with subscribe/unsubscribe commands
 - 🎨 **Color-formatted JSON** — syntax-highlighted API responses for easy reading
 - 🔑 **API key management** — save your key locally so you don't have to re-enter it
@@ -82,13 +82,14 @@ npm start
 | 13 | 🛡️ **Trust API** | Trust and fraud signals for a domain |
 | 14 | 🧾 **VAT API** | VAT, GST, and other company registration numbers for websites |
 | 15 | 🧾 **VAT Types API** | Reference list of registration types (no API key required) |
-| 16 | 🔌 **MCP Registry API** | Search/browse the BuiltWith MCP registry of discovered remote MCP servers (no API credits) |
-| 17 | 🔎 **Vector Search** | Semantic search across technologies and categories |
-| 18 | 💬 **Ask API** | Natural language website list lookup (e.g. "Magento websites in Spain") |
-| 19 | 👤 **WhoAmI** | Check API key identity and plan details |
-| 20 | 📊 **Usage** | View API usage statistics |
-| 21 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
-| 22 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
+| 16 | 🔌 **MCP Registry API** | Search/browse the BuiltWith MCP registry (v1) of discovered remote MCP servers (no API credits) |
+| 17 | 🔌 **MCP Registry API (v2)** | Search/browse the BuiltWith MCP registry (v2), with per-endpoint auth flags and first/last detected dates (no API credits) |
+| 18 | 🔎 **Vector Search** | Semantic search across technologies and categories |
+| 19 | 💬 **Ask API** | Natural language website list lookup (e.g. "Magento websites in Spain") |
+| 20 | 👤 **WhoAmI** | Check API key identity and plan details |
+| 21 | 📊 **Usage** | View API usage statistics |
+| 22 | 🔐 **Agent Auth Start** | Start Device-Code Authorization flow (no API key required) |
+| 23 | 🔐 **Agent Auth Token** | Poll for authorization result and access token (no API key required) |
 
 ### 💬 Ask API — Natural Language Lookups
 

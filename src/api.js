@@ -164,6 +164,16 @@ const ENDPOINTS = {
       { name: 'OFFSET', required: false, description: 'Pagination offset' },
     ],
   },
+  mcpRegistryV2: {
+    name: 'MCP Registry API (v2)',
+    description: 'Search and browse the BuiltWith MCP registry (v2), with per-endpoint auth flags and first/last detected dates (no API credits)',
+    path: '/mcp2/api.json',
+    params: [
+      { name: 'SEARCH', required: false, description: 'Matches domain, description, endpoint URL, and tool names/descriptions' },
+      { name: 'CATEGORY', required: false, description: 'Category to filter by (e.g. developer-tools)' },
+      { name: 'OFFSET', required: false, description: 'Pagination offset' },
+    ],
+  },
   vector: {
     name: 'Vector Search',
     description: 'Search technologies and categories by text using semantic similarity',
