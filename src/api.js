@@ -135,7 +135,7 @@ const ENDPOINTS = {
   trust: {
     name: 'Trust API',
     description: 'Trust and fraud signals for a domain',
-    path: '/trustv1/api.json',
+    path: '/trustv2/api.json',
     params: [
       { name: 'LOOKUP', required: true, description: 'Domain to look up (e.g. example.com)' },
     ],
