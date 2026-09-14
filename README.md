@@ -1,5 +1,9 @@
 # 🟢 BuiltWith TUI
 
+## Domain API v25
+
+Domain lookups now use API v25. Technology records include numeric `confidence` scores from 0 to 1. Full JSON responses include `Meta.company_reg`, an array of company registration records with string `type` and `number` fields; registration numbers preserve leading zeros. The array is empty when unavailable or metadata is excluded. See the [API reference](https://api.builtwith.com/llms.txt).
+
 A terminal-based user interface for exploring the [BuiltWith API](https://api.builtwith.com). Runs in any terminal — Windows CMD, PowerShell, or Bash.
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-green) ![License](https://img.shields.io/badge/License-ISC-blue)

@@ -18,7 +18,7 @@ const ENDPOINTS = {
   domain: {
     name: 'Domain API',
     description: 'Technology + metadata for a domain',
-    path: '/v23/api.json',
+    path: '/v25/api.json',
     params: [
       { name: 'LOOKUP', required: true, description: 'Domain to look up (e.g. example.com)' },
       { name: 'NOPII', required: false, description: 'Exclude PII (1 to enable)' },
