@@ -18,7 +18,7 @@ const ENDPOINTS = {
   domain: {
     name: 'Domain API',
     description: 'Technology + metadata for a domain',
-    path: '/v25/api.json',
+    path: '/v26/api.json',
     params: [
       { name: 'LOOKUP', required: true, description: 'Domain to look up (e.g. example.com)' },
       { name: 'NOPII', required: false, description: 'Exclude PII (1 to enable)' },
@@ -41,7 +41,7 @@ const ENDPOINTS = {
   lists: {
     name: 'Lists API',
     description: 'Sites using a specific technology',
-    path: '/lists12/api.json',
+    path: '/lists13/api.json',
     params: [
       { name: 'TECH', required: true, description: 'Technology name (e.g. Shopify)' },
       { name: 'OTHERTECHS', required: false, description: 'Comma-separated additional required technologies (max 16)' },
@@ -61,8 +61,10 @@ const ENDPOINTS = {
   relationships: {
     name: 'Relationships API',
     description: 'Relationships between sites via shared identifiers',
-    path: '/rv4/api.json',
+    path: '/rv5/api.json',
     params: [
+      { name: 'PAGE', required: false, description: 'Positive page number; follow next_page while more_results is true' },
+      { name: 'IP', required: false, description: 'Include IP identifiers (yes to enable)' },
       { name: 'LOOKUP', required: true, description: 'Domain to look up (e.g. example.com)' },
     ],
   },
@@ -157,7 +159,7 @@ const ENDPOINTS = {
   mcpRegistry: {
     name: 'MCP Registry API',
     description: 'Search and browse the BuiltWith MCP registry of discovered remote MCP servers (no API credits)',
-    path: '/mcp1/api.json',
+    path: '/mcp2/api.json',
     params: [
       { name: 'SEARCH', required: false, description: 'Matches domain, description, endpoint URL, and tool names/descriptions' },
       { name: 'CATEGORY', required: false, description: 'Category to filter by (e.g. developer-tools)' },
