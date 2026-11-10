@@ -11,7 +11,15 @@ on:
     types: [published]
 
 jobs:
+  postman-contract:
+    permissions:
+      contents: read
+    uses: builtwith/builtwith/.github/workflows/postman-contract.yml@main
+    with:
+      release_ref: ${{ inputs.release_ref || github.ref }}
+
   publish:
+    needs: postman-contract
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,17 +35,7 @@ jobs:
 
       - run: npm ci
 
-      - name: Check token is set
-        run: |
-          if [ -z "$NPM_TOKEN" ]; then
-            echo "ERROR: NPM_TOKEN secret is empty or not set"
-            exit 1
-          else
-            echo "NPM_TOKEN is set (length: ${#NPM_TOKEN})"
-          fi
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
 
       - run: npx --yes npm@11.15.0 stage publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
